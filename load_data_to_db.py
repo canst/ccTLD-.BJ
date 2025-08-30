@@ -9,7 +9,7 @@ from collecte_bj_data import get_all_bj_data # On réutilise notre collecteur de
 DB_NAME = "votre_db_name"
 DB_USER = "groupe5-bimhack"
 DB_PASS = "passbimhack"
-DB_HOST = "adresse_du_serveur_db" # ex: localhost ou une adresse IP
+DB_HOST = "https://dataviz.internet.bj/" # ex: localhost ou une adresse IP
 DB_PORT = "5432" # Port par défaut de PostgreSQL
 # -------------------------------------------------------------
 
