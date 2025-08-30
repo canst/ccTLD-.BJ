@@ -29,7 +29,7 @@ with st.sidebar:
     st.markdown("---")
     st.header("📚 Sources des Données")
     st.info("Ce dashboard agrège des données issues des rapports annuels de l'ARCEP BENIN et d'analyses en temps réel.")
-    st.markdown("- **Rapports Annuels ARCEP**\n- **IANA & Requêtes DNS**\n- **Estimations TLD-List.com**")
+    st.markdown("- **Rapports Annuels ARCEP**\n- **[IANA](https://www.iana.org/domains/root/db/bj.html)** : Informations sur la délégation et les serveurs de noms.**\n- **[DomainNameStat](https://domainnamestat.com/statistics/tld/bj)** : Estimation du nombre de domaines.**\n- **[TLD-List](https://tld-list.com/tld/bj)** : Politiques et informations sur le registre DNS.**")
     st.markdown("---")
     st.link_button("Retour au Dashboard Principal", "/URL_VERS_LE_DASHBOARD_PRINCIPAL", type="primary")
     st.markdown("---")
