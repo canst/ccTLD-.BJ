@@ -64,7 +64,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 
 ##Lancez le dashboard
-streamlit run dashboard.py
+python -m streamlit run dashboard.py
 
 L'application s'ouvrira automatiquement dans votre navigateur.
 

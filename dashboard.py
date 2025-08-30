@@ -1,4 +1,4 @@
-# Fichier : dashboard.py 
+# Fichier : dashboard.py (Version Finale Corrigée)
 
 import streamlit as st
 import pandas as pd

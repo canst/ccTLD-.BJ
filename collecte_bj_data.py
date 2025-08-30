@@ -1,4 +1,5 @@
-# Fichier : collecte_bj_data.py 
+# Fichier : collecte_bj_data.py (Version Finale Corrigée)
+
 import requests
 from bs4 import BeautifulSoup
 import dns.resolver
@@ -39,7 +40,7 @@ def prepare_full_domain_timeseries():
     
     # Étape 4 : Création des colonnes pour le statut et l'infobulle
     df_full['Statut'] = np.where(df_full['Année'].isin(official_data['Année']), 'Officiel', 'Donnée estimée')
-    df_full['Commentaire'] = np.where(
+    df_full['Tooltip_Info'] = np.where(
         df_full['Statut'] == 'Officiel',
         df_full['Nombre de domaines .bj'].apply(lambda x: f'{x:,.0f}'.replace(',', ' ')),
         'Donnée à confirmer'
