@@ -32,15 +32,16 @@ def prepare_full_domain_timeseries():
     # Étape 1 : Interpolation linéaire pour combler les vides
     df_full['valeur_estimee'].interpolate(method='linear', inplace=True)
 
-    # Étape 2 : Remplissage de la colonne principale avec les estimations
+    # Étape 2 : C'est la ligne clé. On remplit les "trous" de la colonne principale
+    # avec les valeurs que nous venons d'estimer.
     df_full['Nombre de domaines .bj'].fillna(df_full['valeur_estimee'], inplace=True)
     
-    # Étape 3 : Conversion en entier (maintenant sans erreur car il n'y a plus de NaN)
+    # Étape 3 : Maintenant qu'il n'y a plus de "trous", on peut convertir en entier sans erreur.
     df_full['Nombre de domaines .bj'] = df_full['Nombre de domaines .bj'].astype(int)
     
     # Étape 4 : Création des colonnes pour le statut et l'infobulle
     df_full['Statut'] = np.where(df_full['Année'].isin(official_data['Année']), 'Officiel', 'Donnée estimée')
-    df_full['Commentaires'] = np.where(
+    df_full['commentaires'] = np.where(
         df_full['Statut'] == 'Officiel',
         df_full['Nombre de domaines .bj'].apply(lambda x: f'{x:,.0f}'.replace(',', ' ')),
         'Donnée à confirmer'
@@ -48,7 +49,6 @@ def prepare_full_domain_timeseries():
     return df_full
 
 
-# --- Les autres fonctions de collecte restent les mêmes ---
 def get_nombre_domaines_live():
     try:
         url = "https://www.tld-list.com/tld/bj"
@@ -63,7 +63,7 @@ def get_nombre_domaines_live():
                 return {"valeur": int(nombre_str), "status": "direct"}
     except Exception as e:
         print(f"Échec de la récupération en direct : {e}")
-    return {"valeur": 5902, "status": "estimation"}
+    return {"valeur": 3382, "status": "estimation"}
 
 def calculate_domain_growth(df_historique):
     df_official = df_historique[df_historique['Statut'] == 'Officiel'].sort_values(by='Année')

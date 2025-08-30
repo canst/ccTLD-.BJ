@@ -1,4 +1,4 @@
-# Fichier : dashboard.py (Version Finale Corrigée)
+# Fichier : dashboard.py 
 
 import streamlit as st
 import pandas as pd
@@ -35,7 +35,7 @@ with st.sidebar:
     st.markdown("---")
     st.success(f"Dernière mise à jour : {pd.Timestamp.now(tz='Africa/Porto-Novo').strftime('%d/%m/%Y %H:%M:%S')}")
 
-st.header("📊 Résilience du ccTLD .BJ")
+st.header("ccTLD .BJ")
 st.markdown("Analyse de l'infrastructure, des politiques et de l'évolution du domaine national du Bénin.")
 
 @st.cache_data(ttl=3600)
