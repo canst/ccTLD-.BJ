@@ -31,13 +31,37 @@ CREATE TABLE IF NOT EXISTS bj_nameservers (
     asn_details TEXT
 );
 
--- Instructions :
--- 1. Créez une base de données (ex: CREATE DATABASE cctld_analysis;).
--- 2. Connectez-vous à cette base de données.
--- 3. Exécutez ce script pour créer les tables.
--- Le script Python 'collecte_bj_data.py' contient une nouvelle fonction 'prepare_data_for_db'
--- qui formate les données pour être insérées dans ces tables.
+INSERT INTO bj_kpis (
+    snapshot_date,
+    live_domain_count,
+    live_data_status,
+    nameserver_count,
+    ipv6_availability_percent,
+    dnssec_status
+) VALUES
+    ('2025-08-30', 3400, 'OK', 12, 45.5, 'Enabled');
 
-COMMENT ON TABLE bj_kpis IS 'Instantanés des indicateurs clés pour le ccTLD .BJ.';
-COMMENT ON TABLE bj_domain_history IS 'Données officielles et sourcées de l''évolution du nombre de domaines .BJ.';
-COMMENT ON TABLE bj_nameservers IS 'Informations techniques et de localisation des serveurs de noms du .BJ.';
+INSERT INTO bj_domain_history (
+    annee,
+    nombre_domaines,
+    source
+) VALUES
+    (2019, 1624, 'ARCEP BENIN'),
+    (2020, 1766, 'ARCEP BENIN'),
+    (2021, 2690, 'ARCEP BENIN'),
+    (2022, 3005, 'ARCEP BENIN'),
+    (2023, 3447, 'ARCEP BENIN'),
+    (2024, 3382, 'ARCEP BENIN');
+
+INSERT INTO bj_nameservers (
+    last_updated_date,
+    hostname,
+    ipv4_address,
+    ipv6_address,
+    country_code,
+    asn_details
+) VALUES
+    ('2025-08-30', 'ns1.nic.bj', '196.3.183.1', '2001:43f8:1f0::1', 'BJ', 'ASN 36924 - Benin Telecoms'),
+    ('2025-08-30', 'ns2.nic.bj', '196.3.183.2', NULL, 'BJ', 'ASN 36924 - Benin Telecoms'),
+    ('2025-08-30', 'ns3.nic.bj', '203.0.113.15', '2001:db8::15', 'FR', 'ASN 12345 - Example Hosting');
+
