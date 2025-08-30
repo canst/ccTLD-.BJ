@@ -1,0 +1,9 @@
+# Fichier : requirements.txt
+
+requests
+beautifulsoup4
+dnspython
+ipwhois
+pandas
+streamlit
+altair

@@ -1,0 +1,43 @@
+-- Fichier : schema_postgresql.txt
+-- Schéma de base de données pour le projet d'analyse du ccTLD .BJ
+
+-- Table pour stocker les indicateurs clés quotidiens ou périodiques
+CREATE TABLE IF NOT EXISTS bj_kpis (
+    id SERIAL PRIMARY KEY,
+    snapshot_date DATE NOT NULL DEFAULT CURRENT_DATE,
+    live_domain_count INTEGER,
+    live_data_status VARCHAR(50),
+    nameserver_count INTEGER,
+    ipv6_availability_percent REAL,
+    dnssec_status VARCHAR(50)
+);
+
+-- Table pour stocker l'historique officiel du nombre de domaines
+CREATE TABLE IF NOT EXISTS bj_domain_history (
+    annee INTEGER PRIMARY KEY,
+    nombre_domaines INTEGER NOT NULL,
+    source VARCHAR(255)
+);
+
+-- Table pour stocker les informations sur les serveurs de noms (NS)
+-- Cette table peut être mise à jour périodiquement.
+CREATE TABLE IF NOT EXISTS bj_nameservers (
+    id SERIAL PRIMARY KEY,
+    last_updated_date DATE NOT NULL DEFAULT CURRENT_DATE,
+    hostname VARCHAR(255) UNIQUE NOT NULL,
+    ipv4_address VARCHAR(45),
+    ipv6_address VARCHAR(45),
+    country_code VARCHAR(10),
+    asn_details TEXT
+);
+
+-- Instructions :
+-- 1. Créez une base de données (ex: CREATE DATABASE cctld_analysis;).
+-- 2. Connectez-vous à cette base de données.
+-- 3. Exécutez ce script pour créer les tables.
+-- Le script Python 'collecte_bj_data.py' contient une nouvelle fonction 'prepare_data_for_db'
+-- qui formate les données pour être insérées dans ces tables.
+
+COMMENT ON TABLE bj_kpis IS 'Instantanés des indicateurs clés pour le ccTLD .BJ.';
+COMMENT ON TABLE bj_domain_history IS 'Données officielles et sourcées de l''évolution du nombre de domaines .BJ.';
+COMMENT ON TABLE bj_nameservers IS 'Informations techniques et de localisation des serveurs de noms du .BJ.';
